@@ -2,9 +2,9 @@ import {useEffect, useState} from 'react'
 import './transaction_details.css';
 import axios from 'axios';
 import Pagination from "react-js-pagination";
-import FontAwesome from 'react-fontawesome';
-import faStyles from 'font-awesome/css/font-awesome.css'
-import bootstrap from 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-fontawesome';
+import 'font-awesome/css/font-awesome.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const TransactionDetails = (props) => {
 
@@ -92,7 +92,7 @@ const handleCount = () => {
 
 useEffect(()=> {
     api(payeeFirstname, payeePaymentMethod );
-}, [])
+}, [payeeFirstname, payeePaymentMethod])
 
     return(
         <main className="main">
