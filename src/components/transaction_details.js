@@ -33,19 +33,23 @@ const TransactionDetails = (props) => {
             })
 
             console.log(resp.data.records.profiles);
-                setTotalCount(resp.data.records.profiles.length);
-                setTxDetails(resp.data.records.profiles);
-            if (payee) {
-               getTxDetails.filter((data) => data.FirstName === payee);
-           
-            } 
-            if (payMethod) {
-              getTxDetails.filter((data) => data.PaymentMethod === payMethod);
-           
-            } if (payee && payMethod) {
-                getTxDetails.filter((data) => data.FirstName === payee && data.PaymentMethod === payMethod);
-           
-            } 
+
+            const apiFilter = (payee, payMethod) => {
+                if (payee) {
+                    return resp.data.records.profiles.filter((data) => data.FirstName === payee);
+                } else if (payMethod) {
+                    return resp.data.records.profiles.filter((data) => data.PaymentMethod === payMethod);
+                } else if (payee && payMethod) {
+                    return resp.data.records.profiles.filter((data) => data.FirstName === payee && data.PaymentMethod === payMethod);
+                } else {
+                    return resp.data.records.profiles
+                }
+            }
+
+            setTxDetails(apiFilter(payee, payMethod ))
+
+            setTotalCount(resp.data.records.profiles.length)
+
 
         } catch (err) {
             console.log(err.message)
