@@ -36,7 +36,7 @@ const TransactionDetails = (props) => {
 
             const apiFilter = (filter) => {
               if (filter) {
-                    return resp.data.records.profiles.filter((data) => data.FirstName === filter || data.PaymentMethod === filter);
+                    return resp.data.records.profiles.filter((data) => data.Gender === filter || data.PaymentMethod === filter);
                 } else {
                     return resp.data.records.profiles
                 }
@@ -99,17 +99,35 @@ const TransactionDetails = (props) => {
                 <form onSubmit={handleSubmit}>
                     <div className="row" style={{ margin: "0 auto" }}>
 
-                        <div className="col-lg-12">
+                        <div className="col-lg-6">
                             <div className="search-input">
-                                <label htmlFor="payment-method"></label>
+                                <label htmlFor="gender"></label>
                                 <select class="form-select" 
                                 aria-label="Default select example" 
                                 placeholder="search details by firstname" 
-                                id="payment-method" 
+                                id="gender" 
                                 onChange={handleFilter} >
-                                    <option selected>Open this select menu</option>
-                                    <option value="FirstName">Firstname</option>
-                                    <option value="PaymentMethod">Payment Method</option>
+                                    <option selected>Filter by Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                               
+                                    </select>
+                
+                            </div>
+                        </div>
+                        <div className="col-lg-6">
+                            <div className="search-input">
+                                <label htmlFor="PaymentMethod"></label>
+                                <select class="form-select" 
+                                aria-label="Default select example" 
+                                placeholder="search details by firstname" 
+                                id="PaymentMethod" 
+                                onChange={handleFilter} >
+                                    <option selected>Filter by PaymentMethod</option>
+                                    <option value="paypal">Paypal</option>
+                                    <option value="money order">Money order</option>
+                                    <option value="check">Check</option>
+                                    <option value="cc">Credit Card</option>
                                
                                     </select>
                 

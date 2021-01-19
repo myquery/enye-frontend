@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './transaction_details.css';
+import 'react-fontawesome';
+import 'font-awesome/css/font-awesome.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const TransactionDetails2 = (props) => {
     const [getTxDetails, setTxDetails] = useState([]);
@@ -61,10 +64,10 @@ const TransactionDetails2 = (props) => {
     // const getPaymentMethod =(e) => {
     // setPayeePaymentMethod(e.target.value)
     // }
-    // const handleSubmit = (e ) => {
-    // e.preventDefault();
-    // api(payeeFirstname, payeePaymentMethod );
-    // }
+    const handleSubmit = (e ) => {
+    e.preventDefault();
+   // api(payeeFirstname, payeePaymentMethod );
+    }
     // total records per page to display
     const recordPerPage = getTxDetails.slice(0, 20).length;
     console.log('recordPerPage', recordPerPage)
@@ -122,8 +125,8 @@ const TransactionDetails2 = (props) => {
     return (
         <main className="main">
             <div className="container-fluid search-container">
-                {/* <form onSubmit={handleSubmit> */}
-                <form onSubmit="">
+                <form onSubmit={handleSubmit}>
+                {/* <form onSubmit=""> */}
                     <div className="row" style={{ margin: "0 auto" }}>
                         <div className="col-lg-4">
                             <div className="search-input">
