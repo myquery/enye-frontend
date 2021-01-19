@@ -11,15 +11,15 @@ const TransactionDetails = (props) => {
     const [getTxDetails, setTxDetails] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(1);
     const [totalCount, setTotalCount] = useState(0);
-    const [payeeFirstname, setPayeeFirstname] = useState("");
-    const [payeePaymentMethod, setPayeePaymentMethod] = useState("");
+    const [filterVal, setFilterVal] = useState("");
+    // const [payeePaymentMethod, setPayeePaymentMethod] = useState("");
 
     const HEADERS = {
         'content-type': 'application/json',
         'accept': 'application/json'
     };
 
-    const api = async (payee, payMethod) => {
+    const api = async (filter) => {
 
         let url = "https://api.enye.tech/v1/challenge/records";
 
@@ -34,19 +34,15 @@ const TransactionDetails = (props) => {
 
             console.log(resp.data.records.profiles);
 
-            const apiFilter = (payee, payMethod) => {
-                if (payee) {
-                    return resp.data.records.profiles.filter((data) => data.FirstName === payee);
-                } else if (payMethod) {
-                    return resp.data.records.profiles.filter((data) => data.PaymentMethod === payMethod);
-                } else if (payee && payMethod) {
-                    return resp.data.records.profiles.filter((data) => data.FirstName === payee && data.PaymentMethod === payMethod);
+            const apiFilter = (filter) => {
+              if (filter) {
+                    return resp.data.records.profiles.filter((data) => data.FirstName === filter || data.PaymentMethod === filter);
                 } else {
                     return resp.data.records.profiles
                 }
             }
 
-            setTxDetails(apiFilter(payee, payMethod ))
+            setTxDetails(apiFilter(filterVal ))
 
             setTotalCount(resp.data.records.profiles.length)
 
@@ -58,18 +54,19 @@ const TransactionDetails = (props) => {
 
     }
 
-    const getPayeeFirstname = (e) => {
-        setPayeeFirstname(e.target.value)
+    // const getPayeeFirstname = (e) => {
+    //     setPayeeFirstname(e.target.value)
 
-    }
+    // }
 
-    const getPaymentMethod = (e) => {
-        setPayeePaymentMethod(e.target.value)
+    const handleFilter = (e) => {
+        console.log(e.target.value)
+        setFilterVal(e.target.value)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        api(payeeFirstname, payeePaymentMethod);
+        api(filterVal);
 
     }
 
@@ -78,23 +75,23 @@ const TransactionDetails = (props) => {
     console.log(recordPerPage)
 
     // range of pages in paginator
-    const pageRange = 10;
+    const pageRange = 5;
 
     //move to nextpage
     const handleCount = () => {
         for (let index in getTxDetails) {
             setCurrentIndex(index)
         }
-        api(payeeFirstname, payeePaymentMethod);
+        api(filterVal);
 
     }
 
     useEffect(() => {
 
 
-        api(payeeFirstname, payeePaymentMethod);
+        api(filterVal);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [payeeFirstname, payeePaymentMethod])
+    }, [filterVal])
 
     return (
         <main className="main">
@@ -102,23 +99,23 @@ const TransactionDetails = (props) => {
                 <form onSubmit={handleSubmit}>
                     <div className="row" style={{ margin: "0 auto" }}>
 
-                        <div className="col-lg-4">
-                            <div className="search-input">
-                                <label htmlFor="firstname"></label>
-                                <input type="text" placeholder="search details by firstname" id="firstname" onChange={getPayeeFirstname} />
-                            </div>
-                        </div>
-                        <div className="col-lg-4">
+                        <div className="col-lg-12">
                             <div className="search-input">
                                 <label htmlFor="payment-method"></label>
-                                <input type="text" placeholder="search details by payment method" id="payment-method" onChange={getPaymentMethod} />
+                                <select class="form-select" 
+                                aria-label="Default select example" 
+                                placeholder="search details by firstname" 
+                                id="payment-method" 
+                                onChange={handleFilter} >
+                                    <option selected>Open this select menu</option>
+                                    <option value="FirstName">Firstname</option>
+                                    <option value="PaymentMethod">Payment Method</option>
+                               
+                                    </select>
+                
                             </div>
                         </div>
-                        <div className="col-lg-4">
-                            <div className="search-input">
-                                <button type="submit">Filter</button>
-                            </div>
-                        </div>
+             
 
 
 
@@ -134,6 +131,7 @@ const TransactionDetails = (props) => {
                     <Pagination
                         itemClass="page-item"
                         linkClass="page-link"
+                        activeClass="page-item active"
                         activePage={Number(currentIndex)}
                         itemsCountPerPage={recordPerPage}
                         totalItemsCount={Number(totalCount)}

@@ -29,7 +29,7 @@
         /* box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.1); */
         border-radius: 0.8em;
         text-align: left;
-        margin: 4em 2rem;
+        margin: 2em 2rem;
         padding:1em;
         z-index: 2000;
         /* background: #f5f4f4; */
@@ -95,11 +95,11 @@
        font-size: 1em;
     }
 
-    .search-input input{
+    .search-input select{
         padding: 0.75em;
         margin: 0.70em;
         width: 100%;
-        border-radius: 3em;
+        /* border-radius: 3em; */
         outline: 0em;
         border: 3px solid var(--bkg) !important;
     }
