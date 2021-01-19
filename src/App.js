@@ -1,4 +1,4 @@
-import TransactionDetail2 from './components/transaction_details2'
+import TransactionDetail from './components/transaction_details'
 
 import './App.css';
 
@@ -9,7 +9,7 @@ function App() {
         {/* <div className="bkg-transparent"></div> */}
         <h1>Transactional Details</h1>
       </header>
-      <TransactionDetail2/>
+      <TransactionDetail/>
     </div>
   );
 }
