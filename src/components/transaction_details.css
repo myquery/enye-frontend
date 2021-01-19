@@ -182,5 +182,16 @@
             width: 100%;
    
         }
+        .page-link{
+            border:1px solid var(--var) !important;
+            padding:0.8em !important; 
+        }
+        .pagination {
+            border: 3px solid var(--bkg) !important;
+            margin: 0 auto;
+            width: auto !important;
+       
+            
+        }
     
     }
