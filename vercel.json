@@ -1,6 +1,3 @@
 {
-    "redirects": [
-
-      { "source": "https://enye-frontend-qmukh720f.vercel.app/", "destination": "https://enye-frontend-six.vercel.app/" }
-    ]
-  }
+    "alias": ["https://enye-frontend-six.vercel.app/", "https://enye-frontend-qmukh720f.vercel.app/"]
+}
